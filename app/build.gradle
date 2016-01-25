@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.van.fanyu.photocompress"
-        minSdkVersion 8
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile project(':library');
+    compile project(':photopicker');
 }
