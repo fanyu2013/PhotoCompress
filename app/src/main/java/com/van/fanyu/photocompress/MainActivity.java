@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.van.fanyu.library.CustomUtil;
@@ -18,7 +19,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(this,CustomUtil.getMyHero(),Toast.LENGTH_SHORT).show();
+        setupView();
+    }
+
+    private void setupView() {
+        TextView tv = (TextView) findViewById(R.id.tv);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,CustomUtil.getMyHero(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
