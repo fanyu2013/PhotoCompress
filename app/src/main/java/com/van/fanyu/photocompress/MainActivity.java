@@ -1,11 +1,7 @@
 package com.van.fanyu.photocompress;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,10 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lling.photopicker.PhotoPickerActivity;
 import com.van.fanyu.library.CustomUtil;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static final int PICK_PHOTO = 1;
@@ -39,25 +32,9 @@ public class MainActivity extends AppCompatActivity {
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PhotoPickerActivity.class);
-                intent.putExtra(PhotoPickerActivity.EXTRA_SHOW_CAMERA, true);
-                intent.putExtra(PhotoPickerActivity.EXTRA_SELECT_MODE, PhotoPickerActivity.MODE_SINGLE);
-//                intent.putExtra(PhotoPickerActivity.EXTRA_MAX_MUN, maxNum);
-                startActivityForResult(intent, PICK_PHOTO);
+
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_PHOTO){
-            if(resultCode == RESULT_OK){
-                ArrayList<String> result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
-                //do what you want to to.
-                Toast.makeText(this,result.get(0),Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
     @Override
