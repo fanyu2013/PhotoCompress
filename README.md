@@ -32,7 +32,7 @@ PhotoCompress is very simple to use
 
 As an example:
 ~~~
-Compresser compresser = new Compresser(intValue, oldPath);
+Compresser compresser = new Compresser(quality, oldPath);//0<=quality<=100
 compresser.doCompress(new Compresser.CompleteListener(){
         @Override
         public void onSuccess(String newPath) {
