@@ -21,7 +21,7 @@ allprojects {
 Step 2. Add the dependency
 ~~~
 dependencies {
-	compile 'com.github.fanyu2013:PhotoCompress:v0.4'
+	compile 'com.github.fanyu2013:PhotoCompress:v1.0'
 }
 ~~~
 
