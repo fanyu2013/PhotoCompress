@@ -8,6 +8,7 @@ An Android Library to compress photo
 
 #Project set-up
 If you're using a Gradle-based project:
+<br/>
 Step 1. Add the JitPack repository to your build file
 ~~~
 allprojects {
