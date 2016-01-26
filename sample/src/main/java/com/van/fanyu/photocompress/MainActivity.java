@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lling.photopicker.PhotoPickerActivity;
@@ -51,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
                 //do what you want to to.
                 File file1 = new File(result.get(0));
-                String s1 = "压缩前：" + file1.length() / 1024 / 1024 + "Mb";
+                String s1 = "before compress：" + file1.length() / 1024 / 1024 + "Mb";
                 Toast.makeText(this, s1, Toast.LENGTH_SHORT).show();
-                //压缩
+                //do compress
                 String etStr = "";
                 if (et.getText().toString().equals("")) {
                     etStr = "50";
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(String newPath) {
                         File file2 = new File(newPath);
-                        String s2 = "压缩后：" + file2.length()/1024 + "kb";
+                        String s2 = "after compress：" + file2.length()/1024 + "kb";
                         Toast.makeText(MainActivity.this, s2, Toast.LENGTH_SHORT).show();
                     }
                 });
