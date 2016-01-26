@@ -7,16 +7,20 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lling.photopicker.PhotoPickerActivity;
-import com.van.fanyu.library.CustomUtil;
+import com.van.fanyu.library.Compresser;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static final int PICK_PHOTO = 1;
+    private EditText et;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +29,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupView() {
-        TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,CustomUtil.getMyHero(),Toast.LENGTH_SHORT).show();
-            }
-        });
-        Button btn_choose = (Button)findViewById(R.id.btn_choose);
+        et = (EditText) findViewById(R.id.edittext);
+        Button btn_choose = (Button) findViewById(R.id.btn_choose);
         btn_choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(PhotoPickerActivity.EXTRA_SHOW_CAMERA, true);
                 intent.putExtra(PhotoPickerActivity.EXTRA_SELECT_MODE, PhotoPickerActivity.MODE_SINGLE);
 //                intent.putExtra(PhotoPickerActivity.EXTRA_MAX_MUN, maxNum);
-                        startActivityForResult(intent, PICK_PHOTO);
+                startActivityForResult(intent, PICK_PHOTO);
             }
         });
     }
@@ -48,14 +46,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_PHOTO){
-            if(resultCode == RESULT_OK){
+        if (requestCode == PICK_PHOTO) {
+            if (resultCode == RESULT_OK) {
                 ArrayList<String> result = data.getStringArrayListExtra(PhotoPickerActivity.KEY_RESULT);
                 //do what you want to to.
-                Toast.makeText(this,result.get(0),Toast.LENGTH_LONG).show();
+                File file1 = new File(result.get(0));
+                String s1 = "压缩前：" + file1.length() / 1024 / 1024 + "Mb";
+                Toast.makeText(this, s1, Toast.LENGTH_SHORT).show();
+                //压缩
+                String etStr = "";
+                if (et.getText().toString().equals("")) {
+                    etStr = "50";
+                } else {
+                    etStr = et.getText().toString();
+                }
+                Compresser compresser = new Compresser(Integer.valueOf(etStr), result.get(0));
+                compresser.doCompress(new Compresser.CompleteListener() {
+                    @Override
+                    public void onSuccess(String newPath) {
+                        File file2 = new File(newPath);
+                        String s2 = "压缩后：" + file2.length()/1024 + "kb";
+                        Toast.makeText(MainActivity.this, s2, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

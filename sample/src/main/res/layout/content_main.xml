@@ -13,15 +13,16 @@
     tools:showIn="@layout/activity_main"
     tools:context="com.van.fanyu.photocompress.MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
-        android:text="Hello World!"
+    <EditText
+        android:id="@+id/edittext"
+        android:hint="请输入压缩质量:1-100"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_choose"
-        android:layout_below="@id/tv"
+        android:layout_below="@id/edittext"
         android:text="choose picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
