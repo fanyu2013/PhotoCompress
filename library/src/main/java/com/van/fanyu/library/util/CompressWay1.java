@@ -1,5 +1,6 @@
 package com.van.fanyu.library.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -22,7 +23,7 @@ public class CompressWay1 {
         int inSampleSize = 1;
 
         if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height/ (float) reqHeight);
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
         }
@@ -47,15 +48,10 @@ public class CompressWay1 {
 
     //把bitmap转换成String
     public static void bitmapToString(String filePath, int quality, String newPath) {
-
-        Bitmap bm = getSmallBitmap(filePath);
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bm.compress(Bitmap.CompressFormat.JPEG, quality, baos);
-//        byte[] b = baos.toByteArray();
-//        return Base64.encodeToString(b, Base64.DEFAULT);
-        File file = new File(newPath);
-        FileOutputStream out = null;
         try {
+            Bitmap bm = getSmallBitmap(filePath);
+            File file = new File(newPath);
+            FileOutputStream out = null;
             out = new FileOutputStream(file);
             bm.compress(Bitmap.CompressFormat.JPEG, quality, out);
             try {
@@ -68,4 +64,5 @@ public class CompressWay1 {
             e.printStackTrace();
         }
     }
+
 }

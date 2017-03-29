@@ -1,5 +1,6 @@
 package com.van.fanyu.library;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.van.fanyu.library.util.CompressWay1;
@@ -10,6 +11,7 @@ import com.van.fanyu.library.util.PathUtil;
  * Created by fanyu on 16/1/26.
  */
 public class Compresser {
+    Context context;
     int compressQuality;
     String oldPath;
     String newPath;
@@ -18,10 +20,11 @@ public class Compresser {
         void onSuccess(String newPath);
     }
 
-    public Compresser(int compressQuality, String oldPath) {
+    public Compresser(Context context,int compressQuality, String oldPath) {
+        this.context = context;
         this.compressQuality = compressQuality;
         this.oldPath = oldPath;
-        this.newPath = PathUtil.generateNewPath(oldPath);
+        this.newPath = PathUtil.generateNewPath(context,oldPath);
     }
 
     public void doCompress(CompleteListener listener) {

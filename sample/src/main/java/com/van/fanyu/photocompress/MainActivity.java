@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     etStr = et.getText().toString();
                 }
-                Compresser compresser = new Compresser(Integer.valueOf(etStr), result.get(0));
+                Compresser compresser = new Compresser(this,Integer.valueOf(etStr), result.get(0));
                 compresser.doCompress(new Compresser.CompleteListener() {
                     @Override
                     public void onSuccess(String newPath) {
